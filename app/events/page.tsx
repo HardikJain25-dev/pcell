@@ -68,22 +68,22 @@ export default function Page() {
                       {
                         label: "Event Photo 1",
                         hint: "PROSPECT / Seminar",
-                        src: "/event1.jpg",
+                        src: "/event/event1.jpg",
                       },
                       {
                         label: "Event Photo 2",
                         hint: "Workshop",
-                        src: "/event2.jpg",
+                        src: "/event/event2.jpg",
                       },
                       {
                         label: "Event Photo 3",
                         hint: "Guest Session",
-                        src: "/event3.jpg",
+                        src: "/event/event3.jpg",
                       },
                       {
                         label: "Event Photo 4",
                         hint: "Drive / Fair",
-                        src: "/events/fair.jpg",
+                        src: "/event/event4.webp",
                       },
                     ].map((ph) => (
                       <div

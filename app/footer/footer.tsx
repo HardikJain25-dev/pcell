@@ -25,8 +25,10 @@ export default function Footer() {
           <ul className="flex flex-wrap justify-center sm:justify-start gap-x-4"> {/* Make UL a flex container for horizontal items */}
             <li><a href="/" className="inline-flex items-center hover:scale-105 transition-transform duration-200 ease-out hover:text-[#37322F]">Home</a></li>
             <li><a href="/about" className="inline-flex items-center hover:scale-105 transition-transform duration-200 ease-out hover:text-[#37322F]">About</a></li>
+            <li><a href="/events" className="inline-flex items-center hover:scale-105 transition-transform duration-200 ease-out hover:text-[#37322F]">Events</a></li>
             <li><a href="/team" className="inline-flex items-center hover:scale-105 transition-transform duration-200 ease-out hover:text-[#37322F]">Teams</a></li>
             <li><a href="/recruiter" className="inline-flex items-center hover:scale-105 transition-transform duration-200 ease-out hover:text-[#37322F]">Recruiter</a></li>
+            <li><a href="/drive" className="inline-flex items-center hover:scale-105 transition-transform duration-200 ease-out hover:text-[#37322F]">Drive</a></li>
             
           </ul>
         </div>

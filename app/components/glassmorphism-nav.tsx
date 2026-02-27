@@ -167,7 +167,7 @@ export function GlassmorphismNav() {
               <div className="hidden md:block">
                 <button
                   className="relative bg-white hover:bg-gray-50 text-black font-medium px-6 py-2 rounded-full flex items-center transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer group"
-                  onClick={() => scrollToSection("#contact")} // here link to be added for the join us 
+                  onClick={() => window.open("https://forms.gle/DzEbFPkoFPzMva6s5", "_blank")} // here link to be added for the join us 
                 >
                   <span className="mr-2">Join Us</span>
                   <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -255,7 +255,7 @@ export function GlassmorphismNav() {
                   style={{
                     animationDelay: isOpen ? `${navigation.length * 80 + 150}ms` : "0ms",
                   }}
-                  onClick={() => scrollToSection("#contact")} // here link to be added for the join us
+                  onClick={() => window.open("https://forms.gle/DzEbFPkoFPzMva6s5", "_blank")} // here link to be added for the join us
                 >
                   <span className="mr-2">Join Us</span>
                   <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

@@ -92,18 +92,18 @@ export default function Page() {
   <div className="w-full rounded-3xl border border-[rgba(55,50,47,0.12)] bg-white/85 backdrop-blur-xl shadow-[0_18px_55px_rgba(0,0,0,0.08)] p-5 sm:p-7 md:p-10">
     <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 sm:gap-4 md:gap-5">
       {[
-        { name: "Recruiter 1", src: "/accenture.png" },
-        { name: "Recruiter 2", src: "/Zomato.png" },
-        { name: "Recruiter 3", src: "/EY.png" },
-        { name: "Recruiter 4", src: "/Deloitte.png" },
-        { name: "Recruiter 5", src: "/HCLTECH.png" },
-        { name: "Recruiter 6", src: "/Tata_Consultancy_Services.png" },
-        { name: "Recruiter 7", src: "/Tech Mahindra.png" },
-        { name: "Recruiter 8", src: "/carehealth.png" },
-        { name: "Recruiter 9", src: "/rupeek.png" },
-        { name: "Recruiter 10", src: "/upriver.png" },
-        { name: "Recruiter 11", src: "/ijaipuria.jpeg" },
-        { name: "Recruiter 12", src: "/ca.png" },
+        { name: "Recruiter 1", src: "/aboutlogo/accenture.png" },
+        { name: "Recruiter 2", src: "/aboutlogo/Zomato.png" },
+        { name: "Recruiter 3", src: "/aboutlogo/EY.png" },
+        { name: "Recruiter 4", src: "/aboutlogo/Deloitte.png" },
+        { name: "Recruiter 5", src: "/aboutlogo/HCLTECH.png" },
+        { name: "Recruiter 6", src: "/aboutlogo/Tata_Consultancy_Services.png" },
+        { name: "Recruiter 7", src: "/aboutlogo/Tech Mahindra.png" },
+        { name: "Recruiter 8", src: "/aboutlogo/carehealth.png" },
+        { name: "Recruiter 9", src: "/aboutlogo/rupeek.png" },
+        { name: "Recruiter 10", src: "/aboutlogo/upriver.png" },
+        { name: "Recruiter 11", src: "/aboutlogo/ijaipuria.jpeg" },
+        { name: "Recruiter 12", src: "/aboutlogo/ca.png" },
       ].map((logo) => (
         <div
           key={logo.name}

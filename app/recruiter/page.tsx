@@ -16,21 +16,21 @@ import {
 } from "lucide-react";
 
 const imageLogos = [
-  { src: "/4.png", alt: "Company 4", href: "#", title: "Company 4" },
-  { src: "/5.png", alt: "Company 5", href: "#", title: "Company 5" },
-  { src: "/6.png", alt: "Company 6", href: "#", title: "Company 6" },
-  { src: "/7.png", alt: "Company 7", href: "#", title: "Company 7" },
-  { src: "/8.png", alt: "Company 8", href: "#", title: "Company 8" },
-  { src: "/9.png", alt: "Company 9", href: "#", title: "Company 9" },
-  { src: "/10.png", alt: "Company 10", href: "#", title: "Company 10" },
-  { src: "/11.png", alt: "Company 11", href: "#", title: "Company 11" },
-  { src: "/12.png", alt: "Company 12", href: "#", title: "Company 12" },
-  { src: "/13.png", alt: "Company 13", href: "#", title: "Company 13" },
-  { src: "/14.png", alt: "Company 14", href: "#", title: "Company 14" },
-  { src: "/15.png", alt: "Company 15", href: "#", title: "Company 15" },
-  { src: "/16.png", alt: "Company 16", href: "#", title: "Company 16" },
-  { src: "/17.png", alt: "Company 17", href: "#", title: "Company 17" },
-  { src: "/18.png", alt: "Company 18", href: "#", title: "Company 18" },
+  { src: "/logo/4.png", alt: "Company 4", href: "#", title: "Company 4" },
+  { src: "/logo/5.png", alt: "Company 5", href: "#", title: "Company 5" },
+  { src: "/logo/6.png", alt: "Company 6", href: "#", title: "Company 6" },
+  { src: "/logo/7.png", alt: "Company 7", href: "#", title: "Company 7" },
+  { src: "/logo/8.png", alt: "Company 8", href: "#", title: "Company 8" },
+  { src: "/logo/9.png", alt: "Company 9", href: "#", title: "Company 9" },
+  { src: "/logo/10.png", alt: "Company 10", href: "#", title: "Company 10" },
+  { src: "/logo/11.png", alt: "Company 11", href: "#", title: "Company 11" },
+  { src: "/logo/12.png", alt: "Company 12", href: "#", title: "Company 12" },
+  { src: "/logo/13.png", alt: "Company 13", href: "#", title: "Company 13" },
+  { src: "/logo/14.png", alt: "Company 14", href: "#", title: "Company 14" },
+  { src: "/logo/15.png", alt: "Company 15", href: "#", title: "Company 15" },
+  { src: "/logo/16.png", alt: "Company 16", href: "#", title: "Company 16" },
+  { src: "/logo/17.png", alt: "Company 17", href: "#", title: "Company 17" },
+  { src: "/logo/18.png", alt: "Company 18", href: "#", title: "Company 18" },
 ];
 
 const stats = [
@@ -161,7 +161,7 @@ export default function RecruitmentPage() {
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <a
-                  href="mailto:tpc@slc.du.ac.in"
+                  href="mailto:trainingandplacementcell@shyamlal.du.ac.in"
                   className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[#37322F] text-white rounded-full text-sm sm:text-base font-semibold hover:bg-[#2A2520] transition-all duration-300 hover:scale-105 active:scale-95"
                 >
                   Partner With Us
@@ -180,7 +180,7 @@ export default function RecruitmentPage() {
             <div className="order-1 lg:order-2 relative">
               <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
                 <img
-                  src="/rec2.webp"
+                  src="/recurit/rec2.webp"
                   alt="Shyam Lal College Campus"
                   className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover"
                 />
@@ -354,7 +354,7 @@ export default function RecruitmentPage() {
             <div className="relative">
               <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
                 <img
-                  src="/rec3.jpg"
+                  src="/recurit/rec3.jpg"
                   alt="Students at Shyam Lal College"
                   className="w-full h-[350px] sm:h-[450px] lg:h-[550px] object-cover"
                 />
@@ -399,15 +399,15 @@ export default function RecruitmentPage() {
         <div className="absolute inset-0 m-4 sm:m-6 lg:m-10">
           <div
             className="parallax-bg bg-1 absolute inset-0 bg-cover bg-center transition-opacity duration-700 rounded-2xl sm:rounded-3xl"
-            style={{ backgroundImage: "url(/rec2.webp)" }}
+            style={{ backgroundImage: "url(/recurit/rec2.webp)" }}
           />
           <div
             className="parallax-bg bg-2 absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-700 rounded-2xl sm:rounded-3xl"
-            style={{ backgroundImage: "url(/rec3.jpg)" }}
+            style={{ backgroundImage: "url(/recurit/rec3.jpg)" }}
           />
           <div
             className="parallax-bg bg-3 absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-700 rounded-2xl sm:rounded-3xl"
-            style={{ backgroundImage: "url(/rec1.webp)" }}
+            style={{ backgroundImage: "url(/recurit/rec1.webp)" }}
           />
         </div>
 
@@ -446,13 +446,13 @@ export default function RecruitmentPage() {
             logos={imageLogos}
             speed={80}
             direction="left"
-            logoHeight={160}
+            logoHeight={260}
             mobileLogoHeight={100}
             gap={48}
             hoverSpeed={0}
             scaleOnHover
-            grayscaleOnHover
-            showTooltip
+            // grayscaleOnHover
+            // showTooltip
             rows={1}
             fadeOut
             fadeOutColor="#ffffff"
@@ -475,7 +475,7 @@ export default function RecruitmentPage() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
               <a
-                href="mailto:tpc@slc.du.ac.in"
+                href="mailto:trainingandplacementcell@shyamlal.du.ac.in"
                 className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[#37322F] text-white rounded-full text-sm sm:text-base font-semibold hover:bg-[#2A2520] transition-all duration-300 hover:scale-105"
               >
                 <Mail size={18} />

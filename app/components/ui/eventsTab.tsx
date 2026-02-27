@@ -31,7 +31,7 @@ export function TabsDemo() {
           <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6">
             <div className="bg-white rounded-lg shadow p-3 sm:p-4 flex-1">
               <img
-                src="/events/prospect.jpg"
+                src="/event/prospect1.jpeg"
                 alt="PROSPECT'25"
                 className="mb-2 rounded w-full h-32 sm:h-40 object-cover"
                 onError={(e) => {
@@ -43,9 +43,9 @@ export function TabsDemo() {
             </div>
             <div className="bg-white rounded-lg shadow p-3 sm:p-4 flex-1">
               <img
-                src="/events/compito.jpg"
+                src="/event/compito1.png"
                 alt="COMPITO'24"
-                className="mb-2 rounded w-full h-32 sm:h-40 object-cover"
+                className="mb-2 rounded w-full h-32 sm:h-40 object-cover justify-center"
                 onError={(e) => {
                   (e.currentTarget.style.display = "none");
                 }}
@@ -77,7 +77,7 @@ export function TabsDemo() {
           <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6">
             <div className="bg-white rounded-lg shadow p-3 sm:p-4 flex-1">
               <img
-                src="/events/interview-seminar.jpg"
+                src="/event/seminar1.jpeg"
                 alt="How to Ace Interviews"
                 className="mb-2 rounded w-full h-32 sm:h-40 object-cover"
                 onError={(e) => {
@@ -89,7 +89,7 @@ export function TabsDemo() {
             </div>
             <div className="bg-white rounded-lg shadow p-3 sm:p-4 flex-1">
               <img
-                src="/events/upes-seminar.jpg"
+                src="/event/seminar2.webp"
                 alt="UPES Seminar"
                 className="mb-2 rounded w-full h-32 sm:h-40 object-cover"
                 onError={(e) => {
@@ -124,7 +124,7 @@ export function TabsDemo() {
           <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6">
             <div className="bg-white rounded-lg shadow p-3 sm:p-4 flex-1">
               <img
-                src="/events/react-workshop.jpg"
+                src="/event/workshop1.png"
                 alt="ReactJS Workshop"
                 className="mb-2 rounded w-full h-32 sm:h-40 object-cover"
                 onError={(e) => {
@@ -136,7 +136,7 @@ export function TabsDemo() {
             </div>
             <div className="bg-white rounded-lg shadow p-3 sm:p-4 flex-1">
               <img
-                src="/events/leadership-training.jpg"
+                src="/event/workshop2.png"
                 alt="Leadership Training"
                 className="mb-2 rounded w-full h-32 sm:h-40 object-cover"
                 onError={(e) => {
@@ -170,7 +170,7 @@ export function TabsDemo() {
           <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6">
             <div className="bg-white rounded-lg shadow p-3 sm:p-4 flex-1">
               <img
-                src="/events/internship-drive.jpg"
+                src="/event/drive1.png"
                 alt="Summer Internship Drive"
                 className="mb-2 rounded w-full h-32 sm:h-40 object-cover"
                 onError={(e) => {
@@ -182,7 +182,7 @@ export function TabsDemo() {
             </div>
             <div className="bg-white rounded-lg shadow p-3 sm:p-4 flex-1">
               <img
-                src="/events/job-fair.jpg"
+                src="/event/drive2.jpeg"
                 alt="Annual Job Fair"
                 className="mb-2 rounded w-full h-32 sm:h-40 object-cover"
                 onError={(e) => {

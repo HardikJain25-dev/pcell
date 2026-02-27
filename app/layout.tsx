@@ -5,6 +5,7 @@ import Footer from "./footer/footer";
 import { GlassmorphismNav } from "./components/glassmorphism-nav";
 import Script from "next/script";
 import { Yrsa } from "next/font/google";
+import Seo from "./components/Seo";
 
 
 const geistSans = Geist({
@@ -55,6 +56,7 @@ export default function RootLayout({
           {/* <div className="absolute inset-0 bg-gradient-to-b from-[#F7F1E8] via-transparent to-[#F7F1E8]" /> */}
         </div>
           <GlassmorphismNav />
+          <Seo />
           <main className="flex-1 w-full">{children}</main>
           <Footer />
         </div>

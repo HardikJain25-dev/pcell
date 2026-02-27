@@ -23,17 +23,17 @@ export default function DocumentationSection() {
     {
       title: "Prepare",
       description: " Build a strong profile with resume verification, aptitude practice, and interview training to become industry-ready.",
-      image: "/1.png",
+      image: "/home/1.png",
     },
     {
       title: "Apply & Track",
       description: "Explore internships and placement drives, check eligibility, apply to roles, and track announcements & deadlines.",
-      image: "/2.png",
+      image: "/home/2.png",
     },
     {
       title: "Get Hired",
       description: "Attend tests and interviews, get shortlisted, receive offers, and begin your journey from campus to corporate.",
-      image: "/3.png",
+      image: "/home/3.png",
     },
   ]
 

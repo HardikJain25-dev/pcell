@@ -207,7 +207,7 @@ export default function LandingPage() {
                             }`}
                           >
                             <img
-                              src="home1.png"
+                              src="/home/home1.png"
                               alt="Schedules Dashboard - Customer Subscription Management"
                               className="w-full h-full object-contain "
                             />
@@ -222,7 +222,7 @@ export default function LandingPage() {
                             }`}
                           >
                             <img
-                              src="home3.png"
+                              src="/home/home3.png"
                               alt="Analytics Dashboard"
                               className="w-full h-full object-contain"
                             />
@@ -237,7 +237,7 @@ export default function LandingPage() {
                             }`}
                           >
                             <img
-                              src="home2.png"
+                              src="/home/home2.png"
                               alt="Data Visualization Dashboard"
                               className="w-full h-full object-contain" // Changed from object-cover to object-contain to preserve landscape aspect ratio
                             />
@@ -612,7 +612,7 @@ export default function LandingPage() {
                         <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex items-center justify-center overflow-hidden">
                 
                           <img
-                            src="/placement.webp"
+                            src="/home/placement.webp"
                             alt="Placement"
                             className="w-full h-full object-contain"
                           />
@@ -684,7 +684,7 @@ export default function LandingPage() {
                         <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden items-center justify-center relative">
                           <div className="absolute inset-0 flex items-center justify-center">
                              <img
-                            src="/traning.webp"
+                            src="/home/traning.webp"
                             alt="traning"
                             className="w-full h-full object-cover"
                           />
