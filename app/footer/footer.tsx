@@ -69,7 +69,7 @@ export default function Footer() {
         </div>
       </div>
         <div className="font-libre font-light relative text-transparent bg-clip-text bg-radial-[at_5%_5%] from-white to-zinc-900 to-75% top-1 pb-1 inset-0 flex justify-center items-center text-[7vw] md:text-[7vw]  select-none pointer-events-none z-0">
-        Traning and Placement Cell
+        Training and Placement Cell
       </div>
       
     </footer>

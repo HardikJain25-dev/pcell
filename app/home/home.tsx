@@ -208,7 +208,7 @@ export default function LandingPage() {
                             }`}
                           >
                             <Image
-                              src="/home/home1.avif"
+                              src="/home/home1.png"
                               alt="Schedules Dashboard - Customer Subscription Management"
                               fill
                               style={{ objectFit: 'contain' }}
@@ -218,13 +218,13 @@ export default function LandingPage() {
                           {/* Product Image 2 - Data to insights */}
                           <div
                             className={`absolute inset-0 transition-all duration-500 ease-in-out ${
-                              activeCard === 2
+                              activeCard === 1
                                 ? "opacity-100 scale-100 blur-0"
                                 : "opacity-0 scale-95 blur-sm"
                             }`}
                           >
                             <Image
-                              src="/home/home2.avif"
+                              src="/home/home3.png"
                               alt="Analytics Dashboard"
                               fill
                               style={{ objectFit: 'contain' }}
@@ -234,13 +234,13 @@ export default function LandingPage() {
                           {/* Product Image 3 - Data visualization */}
                           <div
                             className={`absolute inset-0 transition-all duration-500 ease-in-out ${
-                              activeCard === 1
+                              activeCard === 2
                                 ? "opacity-100 scale-100 blur-0"
                                 : "opacity-0 scale-95 blur-sm"
                             }`}
                           >
                             <Image
-                              src="/home/home3.avif"
+                              src="/home/home2.png"
                               alt="Data Visualization Dashboard"
                               fill
                               style={{ objectFit: 'contain' }}
