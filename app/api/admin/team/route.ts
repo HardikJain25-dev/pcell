@@ -65,6 +65,7 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
+    console.log("API PUT /api/admin/team: payload received", body);
 
     if (!body.id) {
       return NextResponse.json(

@@ -6,7 +6,7 @@ import { Upload, X, ImageIcon, Loader2 } from "lucide-react";
 interface CloudinaryUploadProps {
   onUpload: (url: string) => void;
   value?: string;
-  folder: "drives" | "team";
+  folder: "drives" | "team" | "events";
   entityName: string;
   label?: string;
 }
@@ -38,6 +38,9 @@ export default function CloudinaryUpload({
   const validateFile = (file: File): string | null => {
     const maxSize = 5 * 1024 * 1024; // 5MB
     const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+    // Debug: log validation details
+    console.log("CloudinaryUpload: validateFile", file.name, file.type, file.size);
 
     if (!allowedTypes.includes(file.type)) {
       return "Invalid file type. Please upload JPG, PNG, or WebP images only.";
@@ -85,7 +88,8 @@ export default function CloudinaryUpload({
       }
 
       const data = await response.json();
-      
+      // Debug: log Cloudinary response
+      console.log("CloudinaryUpload: upload response", data);
       // Use the secure_url from Cloudinary response
       const imageUrl = data.secure_url;
       
@@ -159,6 +163,9 @@ export default function CloudinaryUpload({
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file) {
+        console.log("CloudinaryUpload: selected file via input", file.name, file.type, file.size);
+      }
+      if (file) {
         handleFileSelect(file);
       }
     },
@@ -172,6 +179,7 @@ export default function CloudinaryUpload({
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
+    console.log("CloudinaryUpload: image removed");
   }, [onUpload]);
 
   const handleClick = useCallback(() => {

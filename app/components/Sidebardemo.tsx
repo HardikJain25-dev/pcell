@@ -6,22 +6,24 @@ import {
   IconBrandTabler,
   IconSettings,
   IconUserBolt,
+  IconCalendar,
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import AdminTeam from "@/app/admin/team";
 import AdminDrives from "@/app/admin/drives";
+import AdminEvents from "@/app/admin/events";
 import { useRouter } from "next/navigation";
 
 export function SidebarDemo() {
   const [open, setOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<"drives" | "team">("drives");
+  const [activeSection, setActiveSection] = useState<"drives" | "team" | "events">("drives");
   const router = useRouter();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const section = params.get("section");
-    if (section === "team" || section === "drives") {
+    if (section === "team" || section === "drives" || section === "events") {
       setActiveSection(section);
     }
   }, []);
@@ -36,6 +38,17 @@ export function SidebarDemo() {
       },
       icon: (
         <IconBrandTabler className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      ),
+    },
+    {
+      label: "Events",
+      href: "#",
+      onClick: () => {
+        setActiveSection("events");
+        window.history.replaceState(null, "", "?section=events");
+      },
+      icon: (
+        <IconCalendar className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
     {
@@ -137,7 +150,7 @@ export const LogoIcon = () => {
 };
 
 type DashboardProps = {
-  activeSection: "drives" | "team";
+  activeSection: "drives" | "team" | "events";
 };
 
 const Dashboard = ({ activeSection }: DashboardProps) => {
@@ -154,6 +167,12 @@ const Dashboard = ({ activeSection }: DashboardProps) => {
         {activeSection === "team" && (
           <section id="team" className="space-y-6">
             <AdminTeam />
+          </section>
+        )}
+
+        {activeSection === "events" && (
+          <section id="events" className="space-y-6">
+            <AdminEvents />
           </section>
         )}
 

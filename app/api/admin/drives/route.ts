@@ -7,47 +7,52 @@ const normalize = (v: any) =>
   v === undefined || v === null || v === "" ? null : v;
 
 async function getDriveWithCompanies(driveId: string): Promise<Drive | null> {
-  const driveResult = await drivesDb.execute({
-    sql: `SELECT * FROM drives WHERE id = ?`,
-    args: [driveId],
-  });
+  try {
+    const driveResult = await drivesDb.execute({
+      sql: `SELECT * FROM drives WHERE id = ?`,
+      args: [driveId],
+    });
 
-  if (driveResult.rows.length === 0) return null;
+    if (driveResult.rows.length === 0) return null;
 
-  const driveRow = driveResult.rows[0];
-  
-  const companiesResult = await drivesDb.execute({
-    sql: `SELECT * FROM drive_companies WHERE drive_id = ?`,
-    args: [driveId],
-  });
+    const driveRow = driveResult.rows[0];
+    
+    const companiesResult = await drivesDb.execute({
+      sql: `SELECT * FROM drive_companies WHERE drive_id = ?`,
+      args: [driveId],
+    });
 
-  const companies: Company[] = companiesResult.rows.map((row) => ({
-    id: String(row.id),
-    name: String(row.name),
-    logoUrl: row.logo_url ? String(row.logo_url) : null,
-    logoImage: row.logo_image ? String(row.logo_image) : null,
-  }));
+    const companies: Company[] = companiesResult.rows.map((row) => ({
+      id: String(row.id),
+      name: String(row.name),
+      logoUrl: row.logo_url ? String(row.logo_url) : null,
+      logoImage: row.logo_image ? String(row.logo_image) : null,
+    }));
 
-  return {
-    id: String(driveRow.id),
-    title: String(driveRow.title),
-    description: driveRow.description ? String(driveRow.description) : null,
-    startDate: String(driveRow.start_date),
-    endDate: String(driveRow.end_date),
-    location: driveRow.location ? String(driveRow.location) : null,
-    type: String(driveRow.type) as Drive["type"],
-    status: String(driveRow.status) as Drive["status"],
-    imageUrl: driveRow.image_url ? String(driveRow.image_url) : null,
-    registrationLink: driveRow.registration_link ? String(driveRow.registration_link) : null,
-    companies,
-    createdAt: String(driveRow.created_at),
-    updatedAt: String(driveRow.updated_at),
-  };
+    return {
+      id: String(driveRow.id),
+      title: String(driveRow.title),
+      description: driveRow.description ? String(driveRow.description) : null,
+      startDate: String(driveRow.start_date),
+      endDate: String(driveRow.end_date),
+      location: driveRow.location ? String(driveRow.location) : null,
+      type: String(driveRow.type) as Drive["type"],
+      status: String(driveRow.status) as Drive["status"],
+      imageUrl: driveRow.image_url ? String(driveRow.image_url) : null,
+      registrationLink: driveRow.registration_link ? String(driveRow.registration_link) : null,
+      companies,
+      createdAt: String(driveRow.created_at),
+      updatedAt: String(driveRow.updated_at),
+    };
+  } catch (err) {
+    console.error("Error fetching drive with companies:", err);
+    return null;
+  }
 }
 
 /* =========================
-   GET — list all drives
-========================= */
+    GET — list all drives
+======================= */
 export async function GET() {
   try {
     const drivesResult = await drivesDb.execute(`
@@ -65,16 +70,14 @@ export async function GET() {
     return NextResponse.json(drives);
   } catch (err) {
     console.error("GET drives error:", err);
-    return NextResponse.json(
-      { error: "Failed to fetch drives" },
-      { status: 500 }
-    );
+    // Return empty array instead of error to prevent crashing the UI
+    return NextResponse.json([]);
   }
 }
 
 /* =========================
-   POST — create new drive
-========================= */
+    POST — create new drive
+======================= */
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -137,8 +140,8 @@ export async function POST(req: Request) {
 }
 
 /* =========================
-   PUT — update drive
-========================= */
+    PUT — update drive
+======================= */
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
@@ -220,8 +223,8 @@ export async function PUT(req: Request) {
 }
 
 /* =========================
-   DELETE — remove drive
-========================= */
+    DELETE — remove drive
+======================= */
 export async function DELETE(req: Request) {
   try {
     const { id } = await req.json();

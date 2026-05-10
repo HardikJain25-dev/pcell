@@ -1,55 +1,55 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Drive, Company } from "@/types/drive";
+import { Event } from "@/types/event";
 import { FaEdit, FaTrash, FaPlus, FaExternalLinkAlt } from "react-icons/fa";
-import AddDriveModal from "./AddDriveModal";
+import AddEventModal from "./AddEventModal";
 
-export default function AdminDrives() {
-  const [drives, setDrives] = useState<Drive[]>([]);
+export default function AdminEvents() {
+  const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
-  const [selectedDrive, setSelectedDrive] = useState<Drive | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    fetchDrives();
+    fetchEvents();
   }, []);
 
-  async function fetchDrives() {
+  async function fetchEvents() {
     try {
-      const res = await fetch("/api/admin/drives");
+      const res = await fetch("/api/admin/events");
       const data = await res.json();
       // Ensure data is an array
-      const drivesArray = Array.isArray(data) ? data : [];
-      setDrives(drivesArray);
+      const eventsArray = Array.isArray(data) ? data : [];
+      setEvents(eventsArray);
     } catch (err) {
-      console.error("Failed to fetch drives:", err);
-      setDrives([]); // Set to empty array on error
+      console.error("Failed to fetch events:", err);
+      setEvents([]); // Set to empty array on error
     } finally {
       setLoading(false);
     }
   }
 
-  async function handleDelete(driveId: string) {
-    if (!confirm("Are you sure you want to delete this drive?")) return;
+  async function handleDelete(eventId: string) {
+    if (!confirm("Are you sure you want to delete this event?")) return;
 
     try {
-      const res = await fetch("/api/admin/drives", {
+      const res = await fetch("/api/admin/events", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: driveId }),
+        body: JSON.stringify({ id: eventId }),
       });
 
       if (res.ok) {
-        fetchDrives();
+        fetchEvents();
       } else {
-        alert("Failed to delete drive");
+        alert("Failed to delete event");
       }
     } catch (err) {
       console.error("Delete error:", err);
-      alert("Failed to delete drive");
+      alert("Failed to delete event");
     }
   }
 
@@ -70,55 +70,57 @@ export default function AdminDrives() {
 
   function getTypeBadgeColor(type: string) {
     switch (type) {
-      case "placement":
+      case "flagship":
         return "bg-purple-100 text-purple-800";
-      case "internship":
+      case "seminar":
         return "bg-orange-100 text-orange-800";
-      case "ppt":
+      case "workshop":
         return "bg-teal-100 text-teal-800";
-      case "other":
-        return "bg-gray-100 text-gray-800";
+      case "drive":
+        return "bg-blue-100 text-blue-800";
+      case "fair":
+        return "bg-pink-100 text-pink-800";
       default:
         return "bg-gray-100 text-gray-800";
     }
   }
 
-  if (loading) return <p>Loading drives...</p>;
+  if (loading) return <p>Loading events...</p>;
 
   return (
     <section className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-white">Placement Drives</h1>
+        <h1 className="text-2xl font-semibold text-white">Events Management</h1>
         <div className="flex gap-2">
           <button
             onClick={() => setOpen(true)}
             className="bg-white text-black px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-200 transition-colors"
           >
             <FaPlus size={14} />
-            Add Drive
+            Add Event
           </button>
           <button
             onClick={() => setEditMode(!editMode)}
             className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors"
           >
-            {editMode ? "Done Editing" : "Edit Drives"}
+            {editMode ? "Done Editing" : "Edit Events"}
           </button>
         </div>
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        {drives.map((drive) => (
+        {events.map((event) => (
           <div
-            key={drive.id}
+            key={event.id}
             className="rounded-xl border border-neutral-700 bg-neutral-800 p-5 shadow-sm"
           >
             <div className="flex gap-4">
               {/* Event Image */}
               <div className="shrink-0">
-                {drive.imageUrl ? (
+                {event.imageUrl ? (
                   <img
-                    src={drive.imageUrl}
-                    alt={drive.title}
+                    src={event.imageUrl}
+                    alt={event.title}
                     className="h-24 w-24 rounded-lg object-cover"
                   />
                 ) : (
@@ -131,23 +133,23 @@ export default function AdminDrives() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <h3 className="font-medium text-white text-lg">{drive.title}</h3>
-                    <p className="text-xs text-gray-400 break-all">ID: {drive.id}</p>
+                    <h3 className="font-medium text-white text-lg">{event.title}</h3>
+                    <p className="text-xs text-gray-400 break-all">ID: {event.id}</p>
                   </div>
                   <div className="flex gap-1">
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusBadgeColor(
-                        drive.status
+                        event.status
                       )}`}
                     >
-                      {drive.status}
+                      {event.status}
                     </span>
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-medium ${getTypeBadgeColor(
-                        drive.type
+                        event.type
                       )}`}
                     >
-                      {drive.type}
+                      {event.type}
                     </span>
                   </div>
                 </div>
@@ -155,58 +157,30 @@ export default function AdminDrives() {
                 <div className="mt-2 space-y-1">
                   <p className="text-sm text-gray-300">
                     <span className="text-gray-500">Date:</span>{" "}
-                    {new Date(drive.startDate).toLocaleDateString()} -{" "}
-                    {new Date(drive.endDate).toLocaleDateString()}
+                    {new Date(event.startDate).toLocaleDateString()} -{" "}
+                    {new Date(event.endDate).toLocaleDateString()}
                   </p>
-                  {drive.location && (
+                  {event.location && (
                     <p className="text-sm text-gray-300">
-                      <span className="text-gray-500">Location:</span> {drive.location}
+                      <span className="text-gray-500">Location:</span> {event.location}
                     </p>
                   )}
                 </div>
               </div>
             </div>
 
-            {/* Companies */}
-            {drive.companies.length > 0 && (
-              <div className="mt-4">
-                <p className="text-xs text-gray-500 mb-2">Participating Companies:</p>
-                <div className="flex flex-wrap gap-3">
-                  {drive.companies.map((company) => {
-                    const logoSrc = company.logoImage || company.logoUrl;
-                    return (
-                      <div key={company.id} className="flex items-center gap-2">
-                        {logoSrc ? (
-                          <img
-                            src={logoSrc}
-                            alt={company.name}
-                            className="h-6 w-6 object-contain rounded"
-                          />
-                        ) : (
-                          <div className="h-6 w-6 rounded bg-neutral-600 flex items-center justify-center text-xs text-white">
-                            {company.name.charAt(0)}
-                          </div>
-                        )}
-                        <span className="text-sm text-gray-300">{company.name}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
             {/* Description */}
-            {drive.description && (
+            {event.description && (
               <p className="mt-3 text-sm text-gray-400 line-clamp-2">
-                {drive.description}
+                {event.description}
               </p>
             )}
 
             {/* Registration Link */}
-            {drive.registrationLink && (
+            {event.registrationLink && (
               <div className="mt-3">
                 <a
-                  href={drive.registrationLink}
+                  href={event.registrationLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300"
@@ -222,7 +196,7 @@ export default function AdminDrives() {
               <div className="mt-4 flex gap-2 pt-3 border-t border-neutral-700">
                 <button
                   onClick={() => {
-                    setSelectedDrive(drive);
+                    setSelectedEvent(event);
                     setEditOpen(true);
                   }}
                   className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-500 transition-colors"
@@ -231,7 +205,7 @@ export default function AdminDrives() {
                   Edit
                 </button>
                 <button
-                  onClick={() => handleDelete(drive.id)}
+                  onClick={() => handleDelete(event.id)}
                   className="flex items-center gap-1 px-3 py-1.5 bg-red-600 text-white rounded-lg text-sm hover:bg-red-500 transition-colors"
                 >
                   <FaTrash size={12} />
@@ -243,35 +217,35 @@ export default function AdminDrives() {
         ))}
       </div>
 
-      {drives.length === 0 && (
+      {events.length === 0 && (
         <div className="text-center py-12 text-gray-500">
-          <p>No drives found. Click "Add Drive" to create your first drive.</p>
+          <p>No events found. Click "Add Event" to create your first event.</p>
         </div>
       )}
 
       {/* Add Modal */}
       {open && (
-        <AddDriveModal
+        <AddEventModal
           onClose={() => setOpen(false)}
           onSuccess={() => {
-            fetchDrives();
+            fetchEvents();
             setOpen(false);
           }}
         />
       )}
 
       {/* Edit Modal */}
-      {editOpen && selectedDrive && (
-        <AddDriveModal
-          drive={selectedDrive}
+      {editOpen && selectedEvent && (
+        <AddEventModal
+          event={selectedEvent}
           onClose={() => {
             setEditOpen(false);
-            setSelectedDrive(null);
+            setSelectedEvent(null);
           }}
           onSuccess={() => {
-            fetchDrives();
+            fetchEvents();
             setEditOpen(false);
-            setSelectedDrive(null);
+            setSelectedEvent(null);
           }}
         />
       )}
