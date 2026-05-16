@@ -53,12 +53,11 @@ export default function AddEventModal({ event, onClose, onSuccess }: AddEventMod
         const error = await res.json();
         alert(error.error || "Failed to save event");
       }
-    } catch (err) {
-      console.error("Save error:", err);
-      alert("Failed to save event");
-    } finally {
-      setLoading(false);
-    }
+     } catch (err) {
+       alert("Failed to save event");
+     } finally {
+       setLoading(false);
+     }
   }
 
   return (

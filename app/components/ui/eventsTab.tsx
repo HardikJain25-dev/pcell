@@ -18,15 +18,13 @@ export function TabsDemo() {
       const res = await fetch("/api/events");
       const data = await res.json();
       // Ensure data is an array
-      const eventsArray = Array.isArray(data) ? data : [];
-      setEvents(eventsArray);
-      // console.log("Fetched events:", eventsArray); // For debugging
-    } catch (err) {
-      console.error("Failed to fetch events:", err);
-      setEvents([]); // Set to empty array on error
-    } finally {
-      setLoading(false);
-    }
+       const eventsArray = Array.isArray(data) ? data : [];
+       setEvents(eventsArray);
+     } catch (err) {
+       setEvents([]); // Set to empty array on error
+     } finally {
+       setLoading(false);
+     }
   }
 
   if (loading) {
@@ -37,15 +35,14 @@ export function TabsDemo() {
     );
   }
 
-  // Handle case where events might be empty or not an array
-  if (!Array.isArray(events)) {
-    console.error("Events is not an array:", events);
-    return (
-      <div className="h-[28rem] sm:h-[32rem] md:h-[36rem] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start my-6 sm:my-8 md:my-10">
-        <div className="flex items-center justify-center py-12">Error loading events data</div>
-      </div>
-    );
-  }
+   // Handle case where events might be empty or not an array
+   if (!Array.isArray(events)) {
+     return (
+       <div className="h-[28rem] sm:h-[32rem] md:h-[36rem] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start my-6 sm:my-8 md:my-10">
+         <div className="flex items-center justify-center py-12">Error loading events data</div>
+       </div>
+     );
+   }
 
   // Group events by type
   const groupedEvents = {

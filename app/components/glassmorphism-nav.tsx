@@ -25,32 +25,27 @@ export function GlassmorphismNav() {
       setHasLoaded(true)
     }, 100)
 
-    const controlNavbar = () => {
-      if (typeof window !== "undefined") {
-        const currentScrollY = window.scrollY
+     const controlNavbar = () => {
+       if (typeof window !== "undefined") {
+         const currentScrollY = window.scrollY
 
-        // console.log("[v0] Scroll event - currentScrollY:", currentScrollY, "lastScrollY:", lastScrollY.current)
+         // Only hide/show after scrolling past 50px to avoid flickering at top
+         if (currentScrollY > 50) {
+           if (currentScrollY > lastScrollY.current && currentScrollY - lastScrollY.current > 5) {
+             // Scrolling down - hide navbar
+             setIsVisible(false)
+           } else if (lastScrollY.current - currentScrollY > 5) {
+             // Scrolling up - show navbar
+             setIsVisible(true)
+           }
+         } else {
+           // Always show navbar when near top
+           setIsVisible(true)
+         }
 
-        // Only hide/show after scrolling past 50px to avoid flickering at top
-        if (currentScrollY > 50) {
-          if (currentScrollY > lastScrollY.current && currentScrollY - lastScrollY.current > 5) {
-            // Scrolling down - hide navbar
-            // console.log("[v0] Hiding navbar - scrolling down")
-            setIsVisible(false)
-          } else if (lastScrollY.current - currentScrollY > 5) {
-            // Scrolling up - show navbar
-            // console.log("[v0] Showing navbar - scrolling up")
-            setIsVisible(true)
-          }
-        } else {
-          // Always show navbar when near top
-          // console.log("[v0] Showing navbar - near top")
-          setIsVisible(true)
-        }
-
-        lastScrollY.current = currentScrollY
-      }
-    }
+         lastScrollY.current = currentScrollY
+       }
+     }
 
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", controlNavbar, { passive: true })

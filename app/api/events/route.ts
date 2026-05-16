@@ -50,13 +50,12 @@ export async function GET() {
     }
 
     return NextResponse.json(events);
-  } catch (err) {
-    console.error("GET events error:", err);
-    return NextResponse.json(
-      { error: "Failed to fetch events" },
-      { status: 500 }
-    );
-  }
+   } catch (err) {
+     return NextResponse.json(
+       { error: "Failed to fetch events" },
+       { status: 500 }
+     );
+   }
 }
 
 /* =========================
@@ -95,13 +94,12 @@ export async function POST(req: Request) {
 
     const event = await getEvent(eventId);
     return NextResponse.json({ success: true, event });
-  } catch (err) {
-    console.error("POST event error:", err);
-    return NextResponse.json(
-      { error: "Failed to create event" },
-      { status: 500 }
-    );
-  }
+   } catch (err) {
+     return NextResponse.json(
+       { error: "Failed to create event" },
+       { status: 500 }
+     );
+   }
 }
 
 /* =========================
@@ -154,13 +152,12 @@ export async function PUT(req: Request) {
 
     const event = await getEvent(body.id);
     return NextResponse.json({ success: true, event });
-  } catch (err) {
-    console.error("PUT event error:", err);
-    return NextResponse.json(
-      { error: "Failed to update event" },
-      { status: 500 }
-    );
-  }
+   } catch (err) {
+     return NextResponse.json(
+       { error: "Failed to update event" },
+       { status: 500 }
+     );
+   }
 }
 
 /* =========================
@@ -183,11 +180,10 @@ export async function DELETE(req: Request) {
     });
 
     return NextResponse.json({ success: true });
-  } catch (err) {
-    console.error("DELETE event error:", err);
-    return NextResponse.json(
-      { error: "Failed to delete event" },
-      { status: 500 }
-    );
-  }
+   } catch (err) {
+     return NextResponse.json(
+       { error: "Failed to delete event" },
+       { status: 500 }
+     );
+   }
 }

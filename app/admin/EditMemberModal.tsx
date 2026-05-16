@@ -36,15 +36,13 @@ export default function EditMemberModal({
   ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    // Debug: log field updates to help trace where updates may break
-    console.log("Admin: field updated", name, value, "for member", member?.id);
+
   };
 
   const handleUpdate = async () => {
     setLoading(true);
     try {
-      // Log payload before sending
-      console.log("Admin: PUT /api/admin/team payload", form);
+
       const res = await fetch("/api/admin/team", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -53,12 +51,11 @@ export default function EditMemberModal({
 
       if (!res.ok) throw new Error("Update failed");
 
-      onSuccess();
-      onClose();
-    } catch (err) {
-      console.error(err);
-      alert("Failed to update member");
-    } finally {
+       onSuccess();
+       onClose();
+     } catch (err) {
+       alert("Failed to update member");
+     } finally {
       setLoading(false);
     }
   };
@@ -68,8 +65,7 @@ export default function EditMemberModal({
 
     setLoading(true);
     try {
-      // Log delete payload
-      console.log("Admin: DELETE /api/admin/team payload", { id: form.id });
+
       const res = await fetch("/api/admin/team", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -78,12 +74,11 @@ export default function EditMemberModal({
 
       if (!res.ok) throw new Error("Delete failed");
 
-      onSuccess();
-      onClose();
-    } catch (err) {
-      console.error(err);
-      alert("Failed to delete member");
-    } finally {
+       onSuccess();
+       onClose();
+     } catch (err) {
+       alert("Failed to delete member");
+     } finally {
       setLoading(false);
     }
   };

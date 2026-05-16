@@ -24,12 +24,11 @@ export default function AdminEvents() {
       // Ensure data is an array
       const eventsArray = Array.isArray(data) ? data : [];
       setEvents(eventsArray);
-    } catch (err) {
-      console.error("Failed to fetch events:", err);
-      setEvents([]); // Set to empty array on error
-    } finally {
-      setLoading(false);
-    }
+     } catch (err) {
+       setEvents([]); // Set to empty array on error
+     } finally {
+       setLoading(false);
+     }
   }
 
   async function handleDelete(eventId: string) {
@@ -47,10 +46,9 @@ export default function AdminEvents() {
       } else {
         alert("Failed to delete event");
       }
-    } catch (err) {
-      console.error("Delete error:", err);
-      alert("Failed to delete event");
-    }
+     } catch (err) {
+       alert("Failed to delete event");
+     }
   }
 
   function getStatusBadgeColor(status: string) {

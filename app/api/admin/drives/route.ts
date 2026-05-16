@@ -7,47 +7,42 @@ const normalize = (v: any) =>
   v === undefined || v === null || v === "" ? null : v;
 
 async function getDriveWithCompanies(driveId: string): Promise<Drive | null> {
-  try {
-    const driveResult = await drivesDb.execute({
-      sql: `SELECT * FROM drives WHERE id = ?`,
-      args: [driveId],
-    });
+  const driveResult = await drivesDb.execute({
+    sql: `SELECT * FROM drives WHERE id = ?`,
+    args: [driveId],
+  });
 
-    if (driveResult.rows.length === 0) return null;
+  if (driveResult.rows.length === 0) return null;
 
-    const driveRow = driveResult.rows[0];
-    
-    const companiesResult = await drivesDb.execute({
-      sql: `SELECT * FROM drive_companies WHERE drive_id = ?`,
-      args: [driveId],
-    });
+  const driveRow = driveResult.rows[0];
+  
+  const companiesResult = await drivesDb.execute({
+    sql: `SELECT * FROM drive_companies WHERE drive_id = ?`,
+    args: [driveId],
+  });
 
-    const companies: Company[] = companiesResult.rows.map((row) => ({
-      id: String(row.id),
-      name: String(row.name),
-      logoUrl: row.logo_url ? String(row.logo_url) : null,
-      logoImage: row.logo_image ? String(row.logo_image) : null,
-    }));
+  const companies: Company[] = companiesResult.rows.map((row) => ({
+    id: String(row.id),
+    name: String(row.name),
+    logoUrl: row.logo_url ? String(row.logo_url) : null,
+    logoImage: row.logo_image ? String(row.logo_image) : null,
+  }));
 
-    return {
-      id: String(driveRow.id),
-      title: String(driveRow.title),
-      description: driveRow.description ? String(driveRow.description) : null,
-      startDate: String(driveRow.start_date),
-      endDate: String(driveRow.end_date),
-      location: driveRow.location ? String(driveRow.location) : null,
-      type: String(driveRow.type) as Drive["type"],
-      status: String(driveRow.status) as Drive["status"],
-      imageUrl: driveRow.image_url ? String(driveRow.image_url) : null,
-      registrationLink: driveRow.registration_link ? String(driveRow.registration_link) : null,
-      companies,
-      createdAt: String(driveRow.created_at),
-      updatedAt: String(driveRow.updated_at),
-    };
-  } catch (err) {
-    console.error("Error fetching drive with companies:", err);
-    return null;
-  }
+  return {
+    id: String(driveRow.id),
+    title: String(driveRow.title),
+    description: driveRow.description ? String(driveRow.description) : null,
+    startDate: String(driveRow.start_date),
+    endDate: String(driveRow.end_date),
+    location: driveRow.location ? String(driveRow.location) : null,
+    type: String(driveRow.type) as Drive["type"],
+    status: String(driveRow.status) as Drive["status"],
+    imageUrl: driveRow.image_url ? String(driveRow.image_url) : null,
+    registrationLink: driveRow.registration_link ? String(driveRow.registration_link) : null,
+    companies,
+    createdAt: String(driveRow.created_at),
+    updatedAt: String(driveRow.updated_at),
+  };
 }
 
 /* =========================
@@ -68,11 +63,10 @@ export async function GET() {
     }
 
     return NextResponse.json(drives);
-  } catch (err) {
-    console.error("GET drives error:", err);
-    // Return empty array instead of error to prevent crashing the UI
-    return NextResponse.json([]);
-  }
+   } catch (err) {
+     // Return empty array instead of error to prevent crashing the UI
+     return NextResponse.json([]);
+   }
 }
 
 /* =========================
@@ -130,13 +124,12 @@ export async function POST(req: Request) {
 
     const drive = await getDriveWithCompanies(driveId);
     return NextResponse.json({ success: true, drive });
-  } catch (err) {
-    console.error("POST drive error:", err);
-    return NextResponse.json(
-      { error: "Failed to create drive" },
-      { status: 500 }
-    );
-  }
+   } catch (err) {
+     return NextResponse.json(
+       { error: "Failed to create drive" },
+       { status: 500 }
+     );
+   }
 }
 
 /* =========================
@@ -213,13 +206,12 @@ export async function PUT(req: Request) {
 
     const drive = await getDriveWithCompanies(body.id);
     return NextResponse.json({ success: true, drive });
-  } catch (err) {
-    console.error("PUT drive error:", err);
-    return NextResponse.json(
-      { error: "Failed to update drive" },
-      { status: 500 }
-    );
-  }
+   } catch (err) {
+     return NextResponse.json(
+       { error: "Failed to update drive" },
+       { status: 500 }
+     );
+   }
 }
 
 /* =========================
@@ -243,11 +235,10 @@ export async function DELETE(req: Request) {
     });
 
     return NextResponse.json({ success: true });
-  } catch (err) {
-    console.error("DELETE drive error:", err);
-    return NextResponse.json(
-      { error: "Failed to delete drive" },
-      { status: 500 }
-    );
-  }
+   } catch (err) {
+     return NextResponse.json(
+       { error: "Failed to delete drive" },
+       { status: 500 }
+     );
+   }
 }

@@ -6,8 +6,8 @@ const normalize = (v: any) =>
   v === undefined || v === null || v === "" ? null : v;
 
 /* =========================
-   GET — list team members
-========================= */
+    GET — list team members
+======================= */
 export async function GET() {
   const result = await teamDb.execute(`
     SELECT * FROM student_team
@@ -18,8 +18,8 @@ export async function GET() {
 }
 
 /* =========================
-   POST — add new member
-========================= */
+    POST — add new member
+======================= */
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -51,7 +51,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true, id });
   } catch (err) {
-    console.error("POST team error:", err);
     return NextResponse.json(
       { error: "Failed to add member" },
       { status: 500 }
@@ -60,12 +59,11 @@ export async function POST(req: Request) {
 }
 
 /* =========================
-   PUT — update member
-========================= */
+    PUT — update member
+======================= */
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
-    console.log("API PUT /api/admin/team: payload received", body);
 
     if (!body.id) {
       return NextResponse.json(
@@ -107,7 +105,6 @@ export async function PUT(req: Request) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("PUT team error:", err);
     return NextResponse.json(
       { error: "Failed to update member" },
       { status: 500 }
@@ -116,8 +113,8 @@ export async function PUT(req: Request) {
 }
 
 /* =========================
-   DELETE — remove member
-========================= */
+    DELETE — remove member
+======================= */
 export async function DELETE(req: Request) {
   try {
     const { id } = await req.json();
@@ -136,7 +133,6 @@ export async function DELETE(req: Request) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("DELETE team error:", err);
     return NextResponse.json(
       { error: "Failed to delete member" },
       { status: 500 }

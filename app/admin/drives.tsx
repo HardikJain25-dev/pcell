@@ -24,12 +24,11 @@ export default function AdminDrives() {
       // Ensure data is an array
       const drivesArray = Array.isArray(data) ? data : [];
       setDrives(drivesArray);
-    } catch (err) {
-      console.error("Failed to fetch drives:", err);
-      setDrives([]); // Set to empty array on error
-    } finally {
-      setLoading(false);
-    }
+     } catch (err) {
+       setDrives([]); // Set to empty array on error
+     } finally {
+       setLoading(false);
+     }
   }
 
   async function handleDelete(driveId: string) {
@@ -47,10 +46,9 @@ export default function AdminDrives() {
       } else {
         alert("Failed to delete drive");
       }
-    } catch (err) {
-      console.error("Delete error:", err);
-      alert("Failed to delete drive");
-    }
+     } catch (err) {
+       alert("Failed to delete drive");
+     }
   }
 
   function getStatusBadgeColor(status: string) {

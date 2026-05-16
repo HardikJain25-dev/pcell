@@ -42,11 +42,10 @@ export default function DrivePage() {
           const pastData = await pastRes.json();
           setPastDrives(pastData.drives || []);
         }
-      } catch (error) {
-        console.error("Failed to fetch drives:", error);
-      } finally {
-        setLoading(false);
-      }
+       } catch (error) {
+       } finally {
+         setLoading(false);
+       }
     }
 
     fetchDrives();

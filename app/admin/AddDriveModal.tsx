@@ -76,12 +76,11 @@ export default function AddDriveModal({ drive, onClose, onSuccess }: AddDriveMod
         const error = await res.json();
         alert(error.error || "Failed to save drive");
       }
-    } catch (err) {
-      console.error("Save error:", err);
-      alert("Failed to save drive");
-    } finally {
-      setLoading(false);
-    }
+     } catch (err) {
+       alert("Failed to save drive");
+     } finally {
+       setLoading(false);
+     }
   }
 
   return (

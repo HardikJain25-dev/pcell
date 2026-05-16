@@ -35,23 +35,20 @@ export default function CloudinaryUpload({
       .replace(/^-|-$/g, "");
   };
 
-  const validateFile = (file: File): string | null => {
-    const maxSize = 5 * 1024 * 1024; // 5MB
-    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+   const validateFile = (file: File): string | null => {
+     const maxSize = 5 * 1024 * 1024; // 5MB
+     const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
 
-    // Debug: log validation details
-    console.log("CloudinaryUpload: validateFile", file.name, file.type, file.size);
+     if (!allowedTypes.includes(file.type)) {
+       return "Invalid file type. Please upload JPG, PNG, or WebP images only.";
+     }
 
-    if (!allowedTypes.includes(file.type)) {
-      return "Invalid file type. Please upload JPG, PNG, or WebP images only.";
-    }
+     if (file.size > maxSize) {
+       return "File too large. Maximum size is 5MB.";
+     }
 
-    if (file.size > maxSize) {
-      return "File too large. Maximum size is 5MB.";
-    }
-
-    return null;
-  };
+     return null;
+   };
 
   const uploadToCloudinary = async (file: File) => {
     if (!cloudName || !uploadPreset) {
@@ -73,38 +70,36 @@ export default function CloudinaryUpload({
     const publicId = `${folder}/${sanitizedEntityName}-${timestamp}`;
     formData.append("public_id", publicId);
 
-    try {
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+     try {
+       const response = await fetch(
+         `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+         {
+           method: "POST",
+           body: formData,
+         }
+       );
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error?.message || "Upload failed");
-      }
+       if (!response.ok) {
+         const errorData = await response.json();
+         throw new Error(errorData.error?.message || "Upload failed");
+       }
 
-      const data = await response.json();
-      // Debug: log Cloudinary response
-      console.log("CloudinaryUpload: upload response", data);
-      // Use the secure_url from Cloudinary response
-      const imageUrl = data.secure_url;
-      
-      setPreviewUrl(imageUrl);
-      onUpload(imageUrl);
-      setUploadProgress(100);
-      
-      return imageUrl;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Upload failed. Please try again.";
-      setError(errorMessage);
-      throw err;
-    } finally {
-      setIsUploading(false);
-    }
+       const data = await response.json();
+       // Use the secure_url from Cloudinary response
+       const imageUrl = data.secure_url;
+       
+       setPreviewUrl(imageUrl);
+       onUpload(imageUrl);
+       setUploadProgress(100);
+       
+       return imageUrl;
+     } catch (err) {
+       const errorMessage = err instanceof Error ? err.message : "Upload failed. Please try again.";
+       setError(errorMessage);
+       throw err;
+     } finally {
+       setIsUploading(false);
+     }
   };
 
   const handleFileSelect = useCallback(
@@ -159,18 +154,15 @@ export default function CloudinaryUpload({
     setIsDragging(false);
   }, []);
 
-  const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (file) {
-        console.log("CloudinaryUpload: selected file via input", file.name, file.type, file.size);
-      }
-      if (file) {
-        handleFileSelect(file);
-      }
-    },
-    [handleFileSelect]
-  );
+   const handleInputChange = useCallback(
+     (e: React.ChangeEvent<HTMLInputElement>) => {
+       const file = e.target.files?.[0];
+       if (file) {
+         handleFileSelect(file);
+       }
+     },
+     [handleFileSelect]
+   );
 
   const handleRemove = useCallback(() => {
     setPreviewUrl(undefined);
@@ -179,7 +171,7 @@ export default function CloudinaryUpload({
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
-    console.log("CloudinaryUpload: image removed");
+
   }, [onUpload]);
 
   const handleClick = useCallback(() => {

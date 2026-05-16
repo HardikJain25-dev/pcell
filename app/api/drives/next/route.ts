@@ -71,11 +71,10 @@ export async function GET() {
     const drive = await getDriveWithCompanies(String(driveRow.id));
 
     return NextResponse.json({ drive });
-  } catch (err) {
-    console.error("GET next drive error:", err);
-    return NextResponse.json(
-      { error: "Failed to fetch next drive" },
-      { status: 500 }
-    );
-  }
+   } catch (err) {
+     return NextResponse.json(
+       { error: "Failed to fetch next drive" },
+       { status: 500 }
+     );
+   }
 }

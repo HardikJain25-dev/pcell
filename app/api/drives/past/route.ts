@@ -67,11 +67,10 @@ export async function GET() {
     }
 
     return NextResponse.json({ drives });
-  } catch (err) {
-    console.error("GET past drives error:", err);
-    return NextResponse.json(
-      { error: "Failed to fetch past drives" },
-      { status: 500 }
-    );
-  }
+   } catch (err) {
+     return NextResponse.json(
+       { error: "Failed to fetch past drives" },
+       { status: 500 }
+     );
+   }
 }
