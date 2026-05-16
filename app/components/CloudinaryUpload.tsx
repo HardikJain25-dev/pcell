@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Upload, X, ImageIcon, Loader2 } from "lucide-react";
 
 interface CloudinaryUploadProps {
@@ -24,9 +24,21 @@ export default function CloudinaryUpload({
   const [error, setError] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | undefined>(value);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const localPreviewUrlRef = useRef<string | null>(null);
+  const uploadIdRef = useRef<string>("");
 
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
   const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+
+  // Clean up any local preview URL when the component unmounts
+  useEffect(() => {
+    return () => {
+      if (localPreviewUrlRef.current) {
+        URL.revokeObjectURL(localPreviewUrlRef.current);
+        localPreviewUrlRef.current = null;
+      }
+    };
+  }, []);
 
   const sanitizeName = (name: string) => {
     return name
@@ -102,34 +114,43 @@ export default function CloudinaryUpload({
      }
   };
 
-  const handleFileSelect = useCallback(
-    async (file: File) => {
-      const validationError = validateFile(file);
-      if (validationError) {
-        setError(validationError);
-        return;
-      }
-
-      // Create local preview
-      const localPreview = URL.createObjectURL(file);
-      setPreviewUrl(localPreview);
-      setError(null);
-
-      try {
-        await uploadToCloudinary(file);
-      } catch {
-        // Error is handled in uploadToCloudinary
-        // Revert to previous value if exists
-        if (value) {
-          setPreviewUrl(value);
+    const handleFileSelect = useCallback(
+      async (file: File) => {
+        const validationError = validateFile(file);
+        if (validationError) {
+          setError(validationError);
+          return;
         }
-      } finally {
-        // Clean up local preview URL
-        URL.revokeObjectURL(localPreview);
-      }
-    },
-    [entityName, folder, onUpload, value]
-  );
+
+        // Create new local preview FIRST
+        const newLocalPreview = URL.createObjectURL(file);
+        // Update state IMMEDIATELY so any render will have the correct value
+        setPreviewUrl(newLocalPreview);
+        setError(null);
+        
+        // THEN clean up any existing local preview
+        if (localPreviewUrlRef.current) {
+          URL.revokeObjectURL(localPreviewUrlRef.current);
+        }
+        // NOW update ref
+        localPreviewUrlRef.current = newLocalPreview;
+
+        try {
+          await uploadToCloudinary(file);
+          // If upload succeeds, we've already set the preview to the Cloudinary URL
+          // in uploadToCloudinary, so we can safely revoke the local preview now
+          if (localPreviewUrlRef.current) {
+            URL.revokeObjectURL(localPreviewUrlRef.current);
+            localPreviewUrlRef.current = null;
+          }
+        } catch {
+          // Error is handled in uploadToCloudinary
+          // The local preview URL is already set above and will be cleaned up
+          // when the image is removed or replaced
+        }
+      },
+      [entityName, folder, onUpload, value]
+    );
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
@@ -164,15 +185,19 @@ export default function CloudinaryUpload({
      [handleFileSelect]
    );
 
-  const handleRemove = useCallback(() => {
-    setPreviewUrl(undefined);
-    onUpload("");
-    setError(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-
-  }, [onUpload]);
+   const handleRemove = useCallback(() => {
+     setPreviewUrl(undefined);
+     onUpload("");
+     setError(null);
+     if (fileInputRef.current) {
+       fileInputRef.current.value = "";
+     }
+     // Clean up local preview URL when image is removed
+     if (localPreviewUrlRef.current) {
+       URL.revokeObjectURL(localPreviewUrlRef.current);
+       localPreviewUrlRef.current = null;
+     }
+   }, [onUpload]);
 
   const handleClick = useCallback(() => {
     fileInputRef.current?.click();
