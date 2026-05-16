@@ -307,7 +307,7 @@ export default function CloudinaryUpload({
       {/* Error Message */}
       {error && (
         <div className="flex items-center gap-2 text-sm text-red-400 bg-red-400/10 p-3 rounded-lg">
-          <span className="flex-shrink-0">⚠️</span>
+          <span className="shrink-0">⚠️</span>
           <span>{error}</span>
         </div>
       )}
